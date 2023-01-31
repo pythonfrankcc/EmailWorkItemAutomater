@@ -1,9 +1,25 @@
+#_________________________________deleting the file created to make room foor the new updated___________
+#before running this code delete the previous myfile in the same location as this __main__ file
+import os
+try:
+    os.remove("myfile.txt")
+except FileNotFoundError as e:
+    print("File does not exist")
+#_______________________________________________________________________________________________________
+
+
+
+
+
+
+
+
 # Importing necessary libraries
 #libraries for email manipulation
 import imaplib, email
 
 #libraries for acquiring environment variables for storing password and username
-import os
+#import os
 #libaries for calculation of elapsed time
 import time
 
@@ -69,13 +85,22 @@ for msg in msgs[::-1]:
  
                 # printing the required content which we need
                 # to extract from our email i.e our body
-                print(data2[0: indexend])
+                extracted_data = data2[0: indexend]
+                print(extracted_data)
+                #placing the data in a file for read by the sticky notes, this is in append mode
+                file1 = open(r"myfile.txt", "a")
+                file1.write(extracted_data)
  
             except UnicodeEncodeError as e:
                 pass
 
+#close file1 to free the memory acquired by file1
+file1.close()
 
-
+#calling the HtmlTagCleaner
+#execfile('HtmlTagsCleaner.py')
+with open('HtmlTagsCleaner.py') as infile:
+    exec(infile.read())
 
 
 
