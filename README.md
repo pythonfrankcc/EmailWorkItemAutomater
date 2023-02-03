@@ -26,4 +26,12 @@ for key in os.environ:
     print(key, '=>', os.environ[key])
 
 
-On using the per_counter on the script, I found that the rough execution time is 8.44 minutes which is roughly 9 minutes
+On using the per_counter on the script, I found that the rough execution time is 8.44 minutes which is roughly 9 minutes which can vary depending on network connection(for fetching the emails + payload of emails) and machine execution time
+
+
+Never found an article on how to manipulate windows sticky notes code so as to allow what we have received after cleaning the context in emails to be directly injected on to sticky notes and so we build our own sticky notes application with the help of tkinter and sqlite3, below is the documentation for the same
+sqlite3:https://docs.python.org/3/library/sqlite3.html
+tkinter:https://docs.python.org/3/library/tk.html
+
+To view the created Database, use SQLiteStudio, which you can download from the following link
+https://sqlitestudio.pl/
