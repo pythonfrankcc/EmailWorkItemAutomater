@@ -1,10 +1,10 @@
 #_________________________________deleting the file created to make room foor the new updated___________
 #before running this code delete the previous myfile in the same location as this __main__ file
 import os
-try:
-    os.remove("myfile.txt")
-except FileNotFoundError as e:
-    print("File does not exist")
+# try:
+#     os.remove("myfile.txt")
+# except FileNotFoundError as e:
+#     print("File does not exist")
 #_______________________________________________________________________________________________________
 
 
@@ -42,8 +42,10 @@ def get_body(msg):
 
 # Function to search for a key value pair
 def search(key, value, con):
-    #result, data = con.search(None, key, '"{}"'.format(value))
-    result, data = con.search(None, key, value)
+    result, data = con.search(None, key, '"{}"'.format(value))
+    #result, data = con.search(None, key, value)
+    print("The type of data that is returned by con.search is:", type(data))
+    print("Here is a sample of the data list returned: ", data[0])
     return data
 
 # Function to get the list of emails under this label
@@ -51,6 +53,7 @@ def get_emails(result_bytes):
     msgs = [] # all the email data are pushed inside a list
     for num in result_bytes[0].split():
         typ, data = con.fetch(num, '(RFC822)')
+        #this is a list of bytes that now need encoding
         msgs.append(data)
  
     return msgs
@@ -70,14 +73,14 @@ msgs = get_emails(search('FROM', os.environ.get('EmailUser'), con))
 
 #finding the required content from the messages
 for msg in msgs[::-1]:
-    for sent in msg:
-        if type(sent) is tuple:
+    for incoming in msg:
+        if type(incoming) is tuple:
  
             # encoding set as utf-8
-            content = str(sent[1], 'utf-8')
+            content = str(incoming[1], 'utf-8')
             data = str(content)
  
-            # Handling errors related to unicodenecode
+            # Handling errors related to unicodencode
             try:
                 indexstart = data.find("ltr")
                 data2 = data[indexstart + 5: len(data)]
@@ -93,6 +96,9 @@ for msg in msgs[::-1]:
  
             except UnicodeEncodeError as e:
                 pass
+#you should close the connection and also logout
+con.close()
+con.logout()
 
 #close file1 to free the memory acquired by file1
 file1.close()

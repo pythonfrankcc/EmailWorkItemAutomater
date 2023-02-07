@@ -35,3 +35,10 @@ tkinter:https://docs.python.org/3/library/tk.html
 
 To view the created Database, use SQLiteStudio, which you can download from the following link
 https://sqlitestudio.pl/
+
+
+the python str() function syntax: str(object, encoding='utf-8'?,errors='strict') and returns the string version of the object. For reference
+https://www.geeksforgeeks.org/python-str-function/
+This information is important in the conversion of the returned tuples from imaplib.IMAP4_SSL.fetch(num, '(RFC822)') which returns bytes of data.
+
+On finishing up with the connection always remember to close the connection to the IMAPLIB server
