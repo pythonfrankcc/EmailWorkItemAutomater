@@ -55,6 +55,11 @@ for i in data1.split():
 			print("subject : ", subject)
 			print("From : ", From,"\n")
 
+			#transfer the same to a file where the sticky notes will read from
+			file1 = open(r"myfile.txt", "a")
+			file1.write(subject)
+			file1.write("\n")
+
 
 
 
@@ -73,22 +78,23 @@ for i in data1.split():
 # 			print("subject : ", subject)
 # 			print("subject : ", subject)
 
+# print("messages before the int conversion to check for the endianess", messages[0])
+# int_val = int.from_bytes(messages[0], "big", signed = "False")
+# print("the value of int_val is: ", int_val)
+# print("\n")
 
-
-
-print("messages before the int conversion to check for the endianess", messages[0])
-int_val = int.from_bytes(messages[0], "big", signed = "False")
-print("the value of int_val is: ", int_val)
-print("\n")
-
-# calculates the total number of sent messages
-messages = int(messages[0])
-print("messages after the int conversion", messages)
-print("\n")
-#using the int.from_bytes returned sth different to using the int and thus could not be used
+# # calculates the total number of sent messages
+# messages = int(messages[0])
+# print("messages after the int conversion", messages)
+# print("\n")
+# #using the int.from_bytes returned sth different to using the int and thus could not be used
 
 
 
 #you should close the connection and also logout
 imap.close()
 imap.logout()
+
+#close file1 to free the memory acquired by file1
+#always remember to close the file on completion
+file1.close()
