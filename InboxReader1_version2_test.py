@@ -21,6 +21,7 @@ res, messages = imap.select('Inbox')
 #check the data format for messages
 print("type of data format for messages is: ", type(messages))
 print("the first element for messages is: ",messages[0]," and is of type: ", type(messages[0]))
+print("\n")
 #from the above, it is seen that messages are a list of bytes and is of length 1
 
 
@@ -29,30 +30,63 @@ result, data = imap.search(None, 'FROM', '"{}"'.format(os.environ.get('EmailUser
 #check the data format for data
 print("type of data format for the data variable is: ", type(data))
 print("the first element for data is: ", data[0], " and is of type: ", type(data[0]))
+print("the length of data is: ", len(data[0]))
+print("\n")
+
+
 #from the above it is seen that data is a list of bytes and is of length 1
 
-# calculates the total number of sent messages
-messages = int(messages[0])
 
-# determine the number of e-mails to be fetched
-n = 3
-
-# iterating over the e-mails
-for i in range(messages, messages - n, -1):
-	res, msg = imap.fetch(str(i), "(RFC822)")	
+#This will help reduce the computational time by getting the last emails in the search batch
+data1 = data[0][-30:]
+print("the value of data1: ",data1," and the type of data1 is: ", type(data1))
+for i in data1.split():
+	typ, msg = imap.fetch(i, '(RFC822)')
 	for response in msg:
 		if isinstance(response, tuple):
 			msg = email.message_from_bytes(response[1])
-			
+
 			# getting the sender's mail id
 			From = msg["From"]
 
 			# getting the subject of the sent mail
 			subject = msg["Subject"]
 
-			# printing the details
-			print("From : ", From)
 			print("subject : ", subject)
+			print("From : ", From,"\n")
+
+
+
+
+# when you want to extract the whole batch of data from the search pattern that you have just created
+# for i in data[0].split():
+# 	typ, msg = imap.fetch(i, '(RFC822)')
+# 	for response in msg:
+# 		if isinstance(response, tuple):
+# 			msg = email.message_from_bytes(response[1])
+# 			# getting the sender's mail id
+# 			From = msg["From"]
+
+# 			# getting the subject of the sent mail
+# 			subject = msg["Subject"]
+
+# 			print("subject : ", subject)
+# 			print("subject : ", subject)
+
+
+
+
+print("messages before the int conversion to check for the endianess", messages[0])
+int_val = int.from_bytes(messages[0], "big", signed = "False")
+print("the value of int_val is: ", int_val)
+print("\n")
+
+# calculates the total number of sent messages
+messages = int(messages[0])
+print("messages after the int conversion", messages)
+print("\n")
+#using the int.from_bytes returned sth different to using the int and thus could not be used
+
 
 
 #you should close the connection and also logout

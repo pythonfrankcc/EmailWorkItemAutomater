@@ -1,5 +1,7 @@
 This is the creation of a gmail sticky note task automater
 
+The use of ("\n") in the code is so as to be able to separate the output from the various segments during the testing
+
 
 IMAP should be enabled on gmail account before beginning
 
