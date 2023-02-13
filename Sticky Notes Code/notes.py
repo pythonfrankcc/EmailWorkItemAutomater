@@ -4,6 +4,10 @@ import sqlite3 as sql
 from tkinter import *
 from tkinter import messagebox
 
+#reading the file with our notes entries
+import os
+with open ("C:/Users/user/Desktop/ML and Algos/GmailStickyNoteAutomater/myfile.txt") as f:
+        contents = f.read()
 # Create database connection and connect to table
 #It also creates the database in the case that it does not exist and the returned object represents the
 #connection on-disk database
@@ -21,7 +25,8 @@ def add_notes():
         #today = date_entry.get()
         today = str(time.ctime())
         notes_title = notes_title_entry.get()
-        notes = notes_entry.get("1.0", "end-1c")
+        #notes = notes_entry.get("1.0", "end-1c")
+        notes = contents
         #Raise a prompt for missing values
         # if (len(today) <=0) & (len(notes_title)<=0) & (len(notes)<=1):
         #         messagebox.showerror(message = "ENTER REQUIRED DETAILS" )
@@ -140,4 +145,4 @@ button4 = Button(window,text='Update Notes', bg = 'Turquoise',fg='Red',command=u
 
 #close the app
 window.mainloop()
-con.close()
+

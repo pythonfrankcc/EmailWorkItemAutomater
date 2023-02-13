@@ -38,9 +38,15 @@ tkinter:https://docs.python.org/3/library/tk.html
 To view the created Database, use SQLiteStudio, which you can download from the following link
 https://sqlitestudio.pl/
 
+In the notes.py file you will see (notes = notes_entry.get("1.0", "end-1c") ) what it means can be found in the below url just in case you ever need to alter the workings of your text file
+https://stackoverflow.com/questions/14824163/how-to-get-the-input-from-the-tkinter-text-widget
 
 the python str() function syntax: str(object, encoding='utf-8'?,errors='strict') and returns the string version of the object. For reference
 https://www.geeksforgeeks.org/python-str-function/
 This information is important in the conversion of the returned tuples from imaplib.IMAP4_SSL.fetch(num, '(RFC822)') which returns bytes of data.
 
 On finishing up with the connection always remember to close the connection to the IMAPLIB server
+
+
+
+When reading files from a specific path you use forward slash('/') even when working on windows 
